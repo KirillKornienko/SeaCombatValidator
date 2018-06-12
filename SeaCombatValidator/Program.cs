@@ -57,6 +57,7 @@ namespace SeaCombatValidator
                 }
             }
 
+            //Проверка оставшихся кораблей
             if (number_ships[0] != 0 ||
                 number_ships[1] != 0 ||
                 number_ships[2] != 0 ||
@@ -66,9 +67,11 @@ namespace SeaCombatValidator
             return true;
         }
 
+        //Рекурсия для определения крайней координаты двух-, трех-, четырехпалубного корабля
         int GetEndPosition(int x, int y, int[,] field, bool vertical)
         {
             int i = 1;
+            //Очистка, чтобы потом не спутать ячейку текущего корабля с новым кораблем
             field[y, x] = 0;
 
             if (GetCell(x + 1, y) == 1 && !vertical)
@@ -86,6 +89,7 @@ namespace SeaCombatValidator
         int[] number_ships = new int[] { 4, 3, 2, 1 };
         int[,] game_field;
 
+        //Проверка ячеек вокруг горизонтально расположенного корабля
         bool HorizontalValidator(int y, int xStart, int xEnd)
         {
             int x_length = xEnd - xStart;
@@ -116,6 +120,7 @@ namespace SeaCombatValidator
             return true;
         }
 
+        //Проверка ячеек вокруг вертикально расположенного корабля
         bool VerticalValidator(int x, int yStart, int yEnd)
         {
             int y_length = yEnd - yStart;
