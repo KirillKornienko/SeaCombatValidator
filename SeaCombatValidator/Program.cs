@@ -17,11 +17,17 @@ namespace SeaCombatValidator
                             {0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
 
-            Console.WriteLine(Validator(field));
-
+            Console.WriteLine(
+                new SeaCombatValidator().Validator(field));
         }
-
-        static bool Validator(int[,] field)
+    }
+    class SeaCombatValidator
+    {
+        /// <summary>
+        /// Запускает валидацию игрового поля, возвращает результат валидации
+        /// </summary>
+        /// <param name="field">Игровое поле</param>
+        public bool Validator(int[,] field)
         {
             game_field = new int[10, 10];
             Array.Copy(field, game_field, field.Length);
@@ -60,7 +66,7 @@ namespace SeaCombatValidator
             return true;
         }
 
-        static int GetEndPosition(int x, int y, int[,] field, bool vertical)
+        int GetEndPosition(int x, int y, int[,] field, bool vertical)
         {
             int i = 1;
             field[y, x] = 0;
@@ -77,10 +83,10 @@ namespace SeaCombatValidator
             return i;
         }
 
-        static int[] number_ships = new int[] { 4, 3, 2, 1 };
-        static int[,] game_field;
+        int[] number_ships = new int[] { 4, 3, 2, 1 };
+        int[,] game_field;
 
-        static bool HorizontalValidator(int y, int xStart, int xEnd)
+        bool HorizontalValidator(int y, int xStart, int xEnd)
         {
             int x_length = xEnd - xStart;
 
@@ -110,7 +116,7 @@ namespace SeaCombatValidator
             return true;
         }
 
-        static bool VerticalValidator(int x, int yStart, int yEnd)
+        bool VerticalValidator(int x, int yStart, int yEnd)
         {
             int y_length = yEnd - yStart;
 
@@ -140,7 +146,7 @@ namespace SeaCombatValidator
             return true;
         }
 
-        static int GetCell(int x, int y)
+        int GetCell(int x, int y)
         {
             if (x < 0 || y < 0 || x >= game_field.GetLength(0) || y >= game_field.GetLength(1))
                 return 0;
